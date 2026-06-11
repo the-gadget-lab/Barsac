@@ -144,13 +144,9 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .t-list{list-style:none;margin-top:1.6rem;display:flex;flex-direction:column;gap:.6rem}
 .t-list li{padding-left:1.5rem;position:relative;font-size:.95rem;color:rgba(243,236,221,.92)}
 .t-list li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;background:var(--gold);border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
-.t-img{overflow:hidden;border-radius:3px}
-.t-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
-.t-img:hover img{transform:scale(1.05)}
-.t-img--tall{grid-row:span 2;aspect-ratio:3/4}
-.t-img--wide{aspect-ratio:16/10}
+.t-img img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:3px}
+.t-img--tall img{aspect-ratio:3/4}
 .t-img figcaption{font-style:italic;font-size:.82rem;color:rgba(243,236,221,.85);padding-top:.5rem}
-.t-img:not(.t-img--tall){aspect-ratio:16/10}
 
 /* ───────── vie & fêtes ───────── */
 .vie-title{font-size:clamp(2.8rem,6vw,5.4rem);margin-bottom:.8rem}
@@ -259,7 +255,7 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
   .site-header.menu-open .nav-toggle span:nth-child(2){opacity:0}
   .site-header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   .village-grid,.terroir-grid,.agenda-grid{grid-template-columns:1fr}
-  .t-img--tall{grid-row:auto;aspect-ratio:16/10}
+  .t-img--tall img{aspect-ratio:16/10}
   .agenda-intro{position:static}
   .cards,.mairie-grid{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr);gap:2rem 1rem}
