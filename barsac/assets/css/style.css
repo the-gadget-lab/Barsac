@@ -194,6 +194,15 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .gallery figure:hover img{transform:scale(1.05)}
 .gallery figure:hover::after{background:rgba(62,74,43,.18)}
 
+/* ───────── questions fréquentes ───────── */
+.faq-list{max-width:760px}
+.faq-item{border-bottom:1px solid var(--line);padding:1.1rem 0}
+.faq-item summary{font-family:var(--display);font-size:1.25rem;cursor:pointer;list-style:none;position:relative;padding-right:2rem;font-variation-settings:"opsz" 50}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);color:var(--gold-deep);font-size:1.4rem;transition:transform .3s var(--ease)}
+.faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq-item p{margin-top:.7rem;color:var(--ink-soft);max-width:62ch}
+
 /* ───────── mairie ───────── */
 .mairie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.5vw,2rem)}
 .mairie-card{background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:1.8rem}
