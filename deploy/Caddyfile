@@ -1,0 +1,11 @@
+# Reverse proxy avec HTTPS automatique (Let's Encrypt).
+# Remplacer le domaine par celui retenu, puis : caddy run --config deploy/Caddyfile
+www.barsac-drome.fr {
+	encode gzip
+	reverse_proxy localhost:3001
+}
+
+# L'apex redirige vers www pour un canonical unique.
+barsac-drome.fr {
+	redir https://www.barsac-drome.fr{uri} permanent
+}
