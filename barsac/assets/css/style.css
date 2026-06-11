@@ -167,14 +167,8 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .agenda-intro{position:sticky;top:120px}
 .agenda-intro h2{font-size:clamp(2.4rem,4.5vw,3.8rem);margin-bottom:1rem}
 .agenda-intro p{color:var(--ink-soft);max-width:32ch}
-.agenda-list{list-style:none;display:flex;flex-direction:column}
-.agenda-item{display:flex;gap:1.5rem;align-items:center;padding:1.5rem 0;border-top:1px solid var(--line)}
-.agenda-item:last-child{border-bottom:1px solid var(--line)}
-.ag-date{flex:0 0 auto;width:64px;text-align:center;font-family:var(--display)}
-.ag-date b{display:block;font-size:2.2rem;line-height:1;color:var(--olive);font-weight:600}
-.ag-date span{font-size:.68rem;letter-spacing:.18em;color:var(--gold-deep)}
-.ag-body h3{font-size:1.4rem;margin-bottom:.25rem;font-variation-settings:"opsz" 50}
-.ag-body p{font-size:.92rem;color:var(--ink-soft)}
+.agenda-widget{min-height:420px;border-top:1px solid var(--line);padding-top:1.2rem}
+.agenda-widget #intramuros_events{width:100%}
 
 /* ───────── découvrir (full-bleed dark) ───────── */
 .decouvrir{position:relative;max-width:none;margin:0;color:var(--paper);min-height:80vh;display:flex;align-items:center;overflow:hidden}

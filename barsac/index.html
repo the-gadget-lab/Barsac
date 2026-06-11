@@ -318,30 +318,11 @@
   <div class="agenda-grid">
     <div class="agenda-intro reveal">
       <h2 class="display">Les prochains<br>rendez-vous</h2>
-      <p>Dates communiquées par la mairie et les associations. Pensez à confirmer auprès des organisateurs.</p>
+      <p>L'agenda du village et du Diois, alimenté par la mairie et les associations via IntraMuros. Pensez à confirmer auprès des organisateurs.</p>
     </div>
-    <ul class="agenda-list">
-      <li class="agenda-item reveal">
-        <span class="ag-date"><b>14</b><span>JUIN</span></span>
-        <div class="ag-body"><h3>Marché des producteurs de pays</h3><p>Place de la Mairie · 17 h – 21 h · buvette &amp; grillades</p></div>
-      </li>
-      <li class="agenda-item reveal" style="--d:.06s">
-        <span class="ag-date"><b>06</b><span>JUIL</span></span>
-        <div class="ag-body"><h3>Festival sous les platanes</h3><p>Spectacle de rue &amp; concert · place du village · entrée libre</p></div>
-      </li>
-      <li class="agenda-item reveal" style="--d:.12s">
-        <span class="ag-date"><b>10</b><span>AOÛT</span></span>
-        <div class="ag-body"><h3>La montée du château — caisses à savon</h3><p>Départ montée du château · 14 h · inscriptions en mairie</p></div>
-      </li>
-      <li class="agenda-item reveal" style="--d:.18s">
-        <span class="ag-date"><b>15</b><span>SEPT</span></span>
-        <div class="ag-body"><h3>Fête des vendanges</h3><p>Repas de village &amp; bal · sur réservation · salle des fêtes</p></div>
-      </li>
-      <li class="agenda-item reveal" style="--d:.24s">
-        <span class="ag-date"><b>13</b><span>DÉC</span></span>
-        <div class="ag-body"><h3>Marché de Noël &amp; vin chaud</h3><p>Place de la Mairie · 16 h – 20 h · artisans &amp; producteurs</p></div>
-      </li>
-    </ul>
+    <div class="agenda-widget reveal" style="--d:.06s">
+      <div id="intramuros_events"></div>
+    </div>
   </div>
 </section>
 
@@ -486,5 +467,24 @@
 </div>
 
 <script src="assets/js/main.js"></script>
+
+<!-- Agenda IntraMuros (commune de Barsac + agglo du Diois) -->
+<script type="text/javascript">
+window.intramurosCityIdEvent = '3753';
+window.intramurosAggloIdEvent = '297';
+window.zoomEvent = 1;
+window.containerSizeEvent = 'medium';
+window.itemPerPageEvent = 10;
+window.imageMaxHeightEvent = 0;
+window.backgroundColorEvent = '#f3ecdd';
+window.titleColorEvent = '#241f17';
+window.dateColorEvent = '#9a4523';
+window.speedEvent = 0;
+window.displayModeEvent = 'grid';
+window.truncateEvent = 0;
+window.showFiltersEvent = 1;
+window.showPinnedFirstEvent = 1;
+</script>
+<script type="text/javascript" charset="UTF-8" src="https://widget.intramuros.org/js/5.1.0/agenda.js" async></script>
 </body>
 </html>
