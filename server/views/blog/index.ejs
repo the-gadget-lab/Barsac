@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+<%- include('../partials/site-header') %>
+
+<main class="blog-wrap">
+  <header class="blog-hero">
+    <p class="eyebrow">Le Journal · Barsac</p>
+    <h1 class="display">Nouvelles<br>du village</h1>
+    <p class="blog-lede">Comptes rendus du conseil, événements, vie associative et petites histoires d'un village de cent cinquante habitants.</p>
+  </header>
+
+  <% if (!posts.length) { %>
+    <p class="empty">Aucun article publié pour le moment. Revenez bientôt !</p>
+  <% } else { %>
+  <div class="post-list">
+    <% posts.forEach((p, i) => { %>
+      <article class="post-card <%= i === 0 ? 'post-card--lead' : '' %>">
+        <a class="post-card-link" href="/blog/<%= p.slug %>">
+          <% if (p.cover_image) { %>
+            <div class="post-card-media"><img src="<%= p.cover_image %>" alt="" loading="lazy"></div>
+          <% } %>
+          <div class="post-card-body">
+            <time class="post-date"><%= formatDate(p.published_at || p.created_at) %></time>
+            <h2><%= p.title %></h2>
+            <% if (p.excerpt) { %><p><%= p.excerpt %></p><% } %>
+            <span class="read-more">Lire la suite →</span>
+          </div>
+        </a>
+      </article>
+    <% }) %>
+  </div>
+  <% } %>
+</main>
+
+<%- include('../partials/site-footer') %>
+<%- include('../partials/foot') %>

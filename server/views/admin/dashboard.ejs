@@ -1,0 +1,44 @@
+<%- include('../partials/head', { bodyClass: 'admin-body' }) %>
+<%- include('../partials/admin-header') %>
+
+<main class="admin-wrap">
+  <div class="admin-bar">
+    <h1 class="display">Articles</h1>
+    <a class="btn" href="/admin/posts/new">+ Nouvel article</a>
+  </div>
+
+  <% if (!posts.length) { %>
+    <p class="empty">Aucun article. Créez le premier avec « Nouvel article ».</p>
+  <% } else { %>
+  <table class="admin-table">
+    <thead>
+      <tr><th>Titre</th><th>Statut</th><th>Date</th><th class="ta-r">Actions</th></tr>
+    </thead>
+    <tbody>
+      <% posts.forEach(p => { %>
+        <tr>
+          <td>
+            <a class="t-title" href="/admin/posts/<%= p.id %>/edit"><%= p.title %></a>
+            <span class="t-slug">/blog/<%= p.slug %></span>
+          </td>
+          <td>
+            <span class="badge badge--<%= p.status %>"><%= p.status === 'published' ? 'Publié' : 'Brouillon' %></span>
+          </td>
+          <td class="t-date"><%= formatDate(p.published_at || p.updated_at) %></td>
+          <td class="ta-r actions">
+            <% if (p.status === 'published') { %>
+              <a href="/blog/<%= p.slug %>" target="_blank" rel="noopener">Voir</a>
+            <% } %>
+            <a href="/admin/posts/<%= p.id %>/edit">Modifier</a>
+            <form method="post" action="/admin/posts/<%= p.id %>/delete" onsubmit="return confirm('Supprimer cet article ?');">
+              <button type="submit" class="link-btn link-btn--danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</main>
+
+<%- include('../partials/foot') %>

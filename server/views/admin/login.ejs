@@ -1,0 +1,19 @@
+<%- include('../partials/head', { bodyClass: 'admin-body' }) %>
+
+<main class="admin-auth">
+  <form class="auth-card" method="post" action="/admin/login">
+    <span class="brand-mark">Barsac</span>
+    <p class="auth-sub">Administration du journal</p>
+    <% if (error) { %><p class="form-error"><%= error %></p><% } %>
+    <label>Identifiant
+      <input type="text" name="username" autocomplete="username" autofocus required>
+    </label>
+    <label>Mot de passe
+      <input type="password" name="password" autocomplete="current-password" required>
+    </label>
+    <button class="btn btn--block" type="submit">Se connecter</button>
+    <p class="auth-hint">Démo : <strong>admin</strong> / <strong>admin</strong></p>
+  </form>
+</main>
+
+<%- include('../partials/foot') %>
