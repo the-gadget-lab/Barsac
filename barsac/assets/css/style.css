@@ -231,6 +231,8 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--paper);font-size:3.5rem;cursor:pointer;padding:1rem;opacity:.7;transition:opacity .3s}
 .lb-nav:hover{opacity:1}
 .lb-prev{left:1rem}.lb-next{right:1rem}
+.lb-count{position:absolute;bottom:1.3rem;left:50%;transform:translateX(-50%);color:rgba(243,236,221,.8);font-size:.8rem;letter-spacing:.18em}
+.zoomable{cursor:zoom-in}
 
 /* ───────── reveal animation ───────── */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}

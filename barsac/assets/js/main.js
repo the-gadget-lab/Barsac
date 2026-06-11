@@ -118,15 +118,18 @@
     }
   }
 
-  /* ── Gallery + lightbox ── */
+  /* ── Visionneuse : galerie + photos de la page ── */
   class Gallery {
     constructor() {
       this.grid = $("#gallery");
       if (!this.grid) return;
       this.box = $("#lightbox");
       this.img = $("#lb-img");
+      this.count = $(".lb-count");
+      this.alts = {};
       this.index = 0;
       this.build();
+      this.bindPageImages();
       this.bind();
     }
     build() {
@@ -143,6 +146,15 @@
       });
       this.grid.appendChild(frag);
     }
+    bindPageImages() {
+      $$(".village-figure img, .t-img img, .card-media img, .band img").forEach((im) => {
+        const i = IMAGES.indexOf(im.src.split("/").pop());
+        if (i === -1) return;
+        if (im.alt) this.alts[i] = im.alt;
+        im.classList.add("zoomable");
+        im.addEventListener("click", () => this.open(i));
+      });
+    }
     bind() {
       $(".lb-close").addEventListener("click", () => this.closeBox());
       $(".lb-next").addEventListener("click", () => this.step(1));
@@ -154,6 +166,11 @@
         if (e.key === "ArrowRight") this.step(1);
         if (e.key === "ArrowLeft") this.step(-1);
       });
+      this.box.addEventListener("touchstart", (e) => { this.touchX = e.touches[0].clientX; }, { passive: true });
+      this.box.addEventListener("touchend", (e) => {
+        const dx = e.changedTouches[0].clientX - this.touchX;
+        if (Math.abs(dx) > 40) this.step(dx < 0 ? 1 : -1);
+      }, { passive: true });
     }
     open(i) {
       this.index = i;
@@ -164,7 +181,12 @@
     }
     show() {
       this.img.src = `assets/img/lg/${IMAGES[this.index]}`;
-      this.img.alt = `Barsac — photographie ${this.index + 1}`;
+      this.img.alt = this.alts[this.index] || `Barsac — photographie ${this.index + 1}`;
+      if (this.count) this.count.textContent = `${this.index + 1} / ${IMAGES.length}`;
+      [1, -1].forEach((d) => {
+        const n = (this.index + d + IMAGES.length) % IMAGES.length;
+        new Image().src = `assets/img/lg/${IMAGES[n]}`;
+      });
     }
     step(d) {
       this.index = (this.index + d + IMAGES.length) % IMAGES.length;
