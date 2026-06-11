@@ -98,10 +98,8 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 
 /* ───────── section scaffolding ───────── */
 .section{max-width:var(--maxw);margin:0 auto;padding:clamp(4.5rem,11vh,8.5rem) var(--pad)}
-.sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:clamp(2rem,5vh,3.5rem);
-  border-top:1px solid var(--line);padding-top:1rem}
-.sec-num{font-family:var(--display);font-size:.95rem;color:var(--gold);font-variation-settings:"opsz" 30}
-.sec-kicker{font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft)}
+.sec-head{margin-bottom:clamp(2rem,5vh,3.5rem);border-top:1px solid var(--line);padding-top:1rem}
+.sec-kicker{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
 .sec-head--invert{border-color:rgba(243,236,221,.3)}
 .sec-head--invert .sec-kicker{color:rgba(243,236,221,.85)}
 
@@ -133,7 +131,6 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .terroir>*{max-width:var(--maxw);margin-inline:auto}
 .terroir .sec-head{border-color:rgba(243,236,221,.25)}
 .terroir .sec-kicker{color:rgba(243,236,221,.8)}
-.terroir .sec-num{color:var(--gold)}
 .terroir-grid{display:grid;grid-template-columns:1fr 1.1fr;grid-auto-rows:auto;gap:clamp(1.4rem,3vw,2.6rem);align-items:start}
 .terroir-text{padding:.5rem 0}
 .terroir-text h2{font-size:clamp(2.6rem,5vw,4.4rem);margin-bottom:1.2rem;color:var(--paper)}
@@ -159,7 +156,7 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .card:hover .card-media img{transform:scale(1.07)}
 .card-body{padding:1.4rem 1.5rem 1.7rem}
-.card-tag{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);border:1px solid currentColor;border-radius:20px;padding:.2rem .65rem;margin-bottom:.8rem}
+.card-tag{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:.6rem}
 .card h3{font-size:1.5rem;margin-bottom:.5rem;font-variation-settings:"opsz" 60,"SOFT" 20}
 .card p{font-size:.96rem;color:var(--ink-soft)}
 
@@ -185,8 +182,7 @@ h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.02;letter-spac
 .dec-inner{max-width:var(--maxw);margin:0 auto;width:100%}
 .decouvrir h2{font-size:clamp(2.8rem,6vw,5rem);margin-bottom:1.2rem}
 .dec-lede{max-width:46ch;font-size:1.15rem;color:rgba(243,236,221,.9)}
-.dec-tags{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
-.dec-tags span{border:1px solid rgba(243,236,221,.45);border-radius:30px;padding:.5rem 1.1rem;font-size:.8rem;letter-spacing:.06em;backdrop-filter:blur(2px)}
+.dec-list{margin-top:2rem;font-size:.95rem;letter-spacing:.04em;color:rgba(243,236,221,.85);max-width:52ch}
 
 /* ───────── galerie ───────── */
 .gallery{columns:3;column-gap:14px}
