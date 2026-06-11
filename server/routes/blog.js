@@ -36,7 +36,7 @@ router.get("/:slug", async (req, res, next) => {
   try {
     const post = await Post.findBySlug(req.params.slug);
     if (!post || post.status !== "published") {
-      return res.status(404).render("404", { title: "Article introuvable · Barsac" });
+      return res.status(404).render("404", { title: "Article introuvable · Barsac", noindex: true });
     }
     const base = baseUrl(req);
     const canonical = `${base}/blog/${post.slug}`;

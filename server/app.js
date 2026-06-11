@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const compression = require("compression");
 const path = require("path");
 const fs = require("fs");
 
@@ -13,6 +14,7 @@ const ROOT = path.join(__dirname, "..");
 function createApp() {
   const app = express();
   app.set("trust proxy", true);
+  app.use(compression());
 
   // Views
   app.set("view engine", "ejs");
@@ -51,8 +53,16 @@ function createApp() {
 
   // Static assets — uploaded covers, then the existing front site at root
   // (which also serves the self-hosted editor bundle under assets/vendor).
-  app.use("/uploads", express.static(path.join(ROOT, "data", "uploads")));
-  app.use(express.static(path.join(ROOT, "barsac")));
+  const staticOpts = {
+    maxAge: "1h",
+    setHeaders(res, filePath) {
+      if (/\.(jpe?g|png|webp|svg|woff2?)$/i.test(filePath)) {
+        res.setHeader("Cache-Control", "public, max-age=604800");
+      }
+    },
+  };
+  app.use("/uploads", express.static(path.join(ROOT, "data", "uploads"), staticOpts));
+  app.use(express.static(path.join(ROOT, "barsac"), staticOpts));
 
   // Routes
   app.use(seoRoutes);
@@ -68,7 +78,7 @@ function createApp() {
 
   // 404
   app.use((req, res) => {
-    res.status(404).render("404", { title: "Page introuvable · Barsac" });
+    res.status(404).render("404", { title: "Page introuvable · Barsac", noindex: true });
   });
 
   // Error handler
@@ -79,7 +89,7 @@ function createApp() {
       err && err.message && /image|Format/.test(err.message)
         ? err.message
         : "Une erreur est survenue.";
-    res.status(500).render("error", { title: "Erreur · Barsac", message });
+    res.status(500).render("error", { title: "Erreur · Barsac", message, noindex: true });
   });
 
   return app;
