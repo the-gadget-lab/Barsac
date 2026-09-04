@@ -28,6 +28,18 @@ Un motif peut aussi être présélectionné avec `index.html?demande=urbanisme#c
 
 Agenda et journal utilisent les widgets IntraMuros de la commune `10970` et de l’intercommunalité `914`. Les actes administratifs utilisent la collectivité `11891`. La configuration se trouve au début de `assets/js/main.js`.
 
+## Vérification éditoriale
+
+Dernière revue complète : 4 septembre 2026. Toute modification d’un horaire, d’une coordonnée, d’un chiffre ou d’un texte touristique doit être recoupée avec une source officielle ou institutionnelle.
+
+Références de maintenance :
+
+- mairie et horaires : [Annuaire de l’administration](https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/drome/94a212de-d39a-43b3-8b7b-9fc8c8fcbffe) et [BANATIC](https://www.banatic.interieur.gouv.fr/commune/26027-Barsac) ;
+- population et rattachements administratifs : [Insee, commune 26027](https://www.insee.fr/fr/statistiques/1405599?geo=COM-26027) ;
+- village et vignoble : [Office de tourisme du Pays Diois](https://www.diois-tourisme.com/pays-diois/communes/barsac/) ;
+- appellation Clairette de Die : [INAO](https://www.inao.gouv.fr/node/31884/printable/pdf) ;
+- photographies : Noak Carrau.
+
 ## Médias et typographies
 
 Les images d’affichage sont en WebP dans `assets/img/lg` et `assets/img/sm`. Le JPEG de couverture est conservé pour le partage sur les réseaux sociaux. Fraunces et Spectral sont auto-hébergées dans `assets/fonts`, avec leurs licences OFL.
@@ -47,6 +59,5 @@ Un exemple de configuration Caddy avec HTTPS, en-têtes de sécurité, cache et 
 Avant la mise en ligne, il reste impératif de :
 
 - renseigner l’identité exacte de l’hébergeur dans `mentions-legales.html` et `confidentialite.html` ;
-- confirmer le crédit des photographies dans `credits.html` ;
 - configurer les DNS de `barsac-drome.fr` ;
-- réaliser un audit RGAA et mettre à jour `accessibilite.html`.
+- réaliser un audit RGAA, publier le schéma pluriannuel et le plan d’action annuel, puis mettre à jour `accessibilite.html`.

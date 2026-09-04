@@ -31,26 +31,26 @@ window.showPinnedFirstNews = 1;
   "use strict";
 
   const IMAGES = [
-    ["NK1911_DJI_0092-Panoramabd", 1800, 474, "Panorama de Barsac dans la vallée du Diois"],
-    ["NK1911_DJI_0098bd", 1800, 1199, "Vue aérienne de Barsac dans la vallée"],
-    ["NK1911_DJI_0105bd", 1800, 1056, "Le village et ses vignes en automne"],
-    ["NK_0308N_7427bd", 1800, 600, "Paysage autour de Barsac"],
-    ["NK_0409N_8723bd", 1800, 1200, "Vendanges dans les vignes"],
-    ["NK_0409N_8736bd", 1800, 1200, "Vie viticole à Barsac"],
-    ["NK_04N09_8459bd", 1800, 1200, "Vignes du Diois"],
-    ["NK_0908N_0975bd", 1800, 1200, "Été à Barsac"],
-    ["NK_0908N_1051bd", 1800, 1200, "Montagnes autour de Barsac"],
-    ["NK_1206N_7901bd", 1800, 1200, "Fête au village"],
-    ["NK_1206N_8388bd", 1800, 1200, "Vie du village"],
-    ["NK_1509N_4022bd", 1800, 1200, "Vendanges de la Clairette"],
-    ["NK_1707N_3450bd", 1800, 1200, "Producteurs locaux"],
-    ["NK_1902N_7240bd", 1800, 1350, "Taille de la vigne en hiver"],
-    ["NK_2506N_0483bd", 1800, 1350, "Course de caisses à savon"],
-    ["NK_2603N_2912bd", 1800, 1350, "Chevreaux à la ferme"],
-    ["NK_2604N_7589bd", 1800, 1201, "Printemps dans le Diois"],
-    ["NK_2605N_7751bd", 1800, 1201, "Spectacle sous les platanes"],
-    ["NK_2605N_7792bd", 1800, 1201, "Animation à Barsac"],
-    ["NK_2605N_7824bd", 1800, 1061, "Concert dans une cave"],
+    ["NK1911_DJI_0092-Panoramabd", 1800, 474, "Panorama d’un village entre vignes et collines boisées"],
+    ["NK1911_DJI_0098bd", 1800, 1199, "Vue aérienne d’un village entouré de vignes"],
+    ["NK1911_DJI_0105bd", 1800, 1056, "Vue aérienne du village et de son vignoble"],
+    ["NK_0308N_7427bd", 1800, 600, "Groupe réuni au milieu des rangs de vigne"],
+    ["NK_0409N_8723bd", 1800, 1200, "Personnes et tracteur au milieu des rangs de vigne"],
+    ["NK_0409N_8736bd", 1800, 1200, "Vendangeuse coupant une grappe de raisin blanc"],
+    ["NK_04N09_8459bd", 1800, 1200, "Grappe de raisin blanc sur la vigne"],
+    ["NK_0908N_0975bd", 1800, 1200, "Cycliste en VTT sur un chemin de montagne"],
+    ["NK_0908N_1051bd", 1800, 1200, "Cycliste en VTT sur un chemin bordé de vignes"],
+    ["NK_1206N_7901bd", 1800, 1200, "Artiste costumée devant un public en plein air"],
+    ["NK_1206N_8388bd", 1800, 1200, "Public rassemblé en plein air à la nuit tombée"],
+    ["NK_1509N_4022bd", 1800, 1200, "Vendangeur portant une comporte de raisin blanc"],
+    ["NK_1707N_3450bd", 1800, 1200, "Boulangère présentant des pains"],
+    ["NK_1902N_7240bd", 1800, 1350, "Groupe réuni autour d’un pied de vigne"],
+    ["NK_2506N_0483bd", 1800, 1350, "Participant dans une caisse à savon devant le public"],
+    ["NK_2603N_2912bd", 1800, 1350, "Enfant caressant de jeunes chèvres"],
+    ["NK_2604N_7589bd", 1800, 1201, "Groupe réuni en plein air devant les montagnes"],
+    ["NK_2605N_7751bd", 1800, 1201, "Artiste de cirque se produisant en plein air"],
+    ["NK_2605N_7792bd", 1800, 1201, "Personnes tenant des verres de vin blanc"],
+    ["NK_2605N_7824bd", 1800, 1061, "Musiciens jouant devant un public dans une cave"],
   ];
   const $ = (selector, context = document) => context.querySelector(selector);
   const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
@@ -172,19 +172,56 @@ window.showPinnedFirstNews = 1;
 
   class WidgetStatus {
     constructor() {
-      [$("#intramuros_events"), $("#intramuros_news")].filter(Boolean).forEach((container) => {
-        const clearLoading = () => {
-          const loading = $(".widget-loading", container);
-          if (loading && container.textContent.replace(loading.textContent, "").trim()) loading.remove();
+      const widgets = [
+        { container: $("#intramuros_events"), message: $('[data-empty-for="events"]'), emptyPattern: /aucun événement/i },
+        { container: $("#intramuros_news"), message: $('[data-empty-for="news"]'), emptyPattern: /aucune (publication|actualité)/i },
+      ];
+      widgets.filter(({ container, message }) => container && message).forEach(({ container, message, emptyPattern }) => {
+        const widget = container.closest(".info-widget");
+        const update = () => {
+          const loaded = [...container.children].some((child) => !child.classList.contains("widget-loading"));
+          if (!loaded) return;
+          $(".widget-loading", container)?.remove();
+          const empty = emptyPattern.test(container.textContent);
+          widget.classList.toggle("is-empty", empty);
+          message.hidden = !empty;
+          container.setAttribute("aria-hidden", String(empty));
         };
-        new MutationObserver(clearLoading).observe(container, { childList: true, subtree: true, characterData: true });
-        clearLoading();
+        new MutationObserver(update).observe(container, { childList: true, subtree: true, characterData: true });
+        update();
       });
     }
   }
 
+  class LegalStatus {
+    constructor() {
+      this.frame = $("#widget-actes-administratifs");
+      this.message = $('[data-empty-for="legal"]');
+      this.widget = this.frame?.closest(".info-widget");
+      if (this.frame && this.message && this.widget) this.check();
+    }
+    async check() {
+      try {
+        const response = await fetch(this.frame.src, { credentials: "omit" });
+        if (!response.ok) return;
+        const page = new DOMParser().parseFromString(await response.text(), "text/html");
+        const nextData = page.querySelector("#__NEXT_DATA__")?.textContent;
+        if (!nextData) return;
+        const documents = JSON.parse(nextData)?.props?.pageProps?.legalDisplayDocuments;
+        if (!Array.isArray(documents)) return;
+        const empty = documents.length === 0;
+        this.widget.classList.toggle("is-empty", empty);
+        this.message.hidden = !empty;
+        this.frame.hidden = empty;
+        this.frame.setAttribute("aria-hidden", String(empty));
+      } catch (_error) {
+        // En cas d’indisponibilité du contrôle, l’iframe reste visible.
+      }
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    new Header(); new Reveal(); new Counters(); new ScrollSpy(); new Gallery(); new ContactForm(); new WidgetStatus();
+    new Header(); new Reveal(); new Counters(); new ScrollSpy(); new Gallery(); new ContactForm(); new WidgetStatus(); new LegalStatus();
     const year = $("#year"); if (year) year.textContent = new Date().getFullYear();
   });
 })();

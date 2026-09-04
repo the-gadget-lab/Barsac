@@ -135,8 +135,7 @@ body.menu-locked{overflow:hidden}
 .link-arrow svg{transition:transform .3s var(--ease)}
 .link-arrow:hover svg{transform:translateX(5px)}
 .link-arrow--light{color:var(--paper);border-color:var(--gold-bright)}
-.data-source{margin-top:1rem;font-size:.78rem;color:var(--ink-soft);text-align:right}
-.data-source a,.text-link{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:.2em}
+.text-link{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:.2em}
 
 /* ───────── accès rapides ───────── */
 .quick-section{background:var(--ink);color:var(--paper);padding:1.3rem var(--pad) 1.6rem}
@@ -204,8 +203,9 @@ body.menu-locked{overflow:hidden}
 .card p{font-size:.96rem;color:var(--ink-soft)}
 
 /* ───────── informations municipales / widgets IntraMuros ───────── */
-.info-feed--tinted{background:var(--paper-2);max-width:none}
-.info-feed--tinted>*{max-width:var(--maxw);margin-inline:auto}
+.info-feed{max-width:none}
+.info-feed>.sec-head,.info-feed>.info-grid{width:100%;max-width:1120px;margin-inline:auto}
+.info-feed--tinted{background:var(--paper-2)}
 .info-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
 .info-intro{position:sticky;top:120px}
 .info-intro h2{font-size:clamp(2.4rem,4.5vw,3.8rem);margin-bottom:1rem}
@@ -216,6 +216,13 @@ body.menu-locked{overflow:hidden}
 .info-widget--legal iframe{display:block;width:100%;height:600px;border:0;background:#fff}
 .widget-loading{padding:2rem;text-align:center;color:var(--ink-soft);font-style:italic}
 #intramuros_events:has(#intramuros-event-content)>.widget-loading,#intramuros_news:has(#intramuros-news-content)>.widget-loading{display:none}
+.info-widget.is-empty{min-height:0;padding:0;background:transparent;border-color:var(--line);box-shadow:none}
+.info-widget.is-empty>#intramuros_events,.info-widget.is-empty>#intramuros_news{display:none}
+.empty-state{min-height:240px;padding:clamp(2rem,5vw,3.5rem);display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(179,129,47,.08),transparent 58%);position:relative;overflow:hidden}
+.empty-state::after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(125,90,30,.14);border-radius:50%;right:-55px;bottom:-95px}
+.empty-rule{display:block;width:44px;height:2px;background:var(--gold-deep);margin-bottom:1.2rem}
+.empty-state h3{font-size:clamp(1.55rem,3vw,2.15rem);color:var(--olive);margin-bottom:.55rem}
+.empty-state p{max-width:38ch;color:var(--ink-soft)}
 .info-intro .text-link{display:inline-block;margin-top:1.2rem;color:var(--olive)}
 
 /* ───────── découvrir (full-bleed dark) ───────── */
@@ -315,6 +322,10 @@ body.menu-locked{overflow:hidden}
 .simple-main h1{font-size:clamp(2.8rem,7vw,5.5rem);margin-bottom:1rem}.simple-main .lede{font-size:1.2rem;color:var(--ink-soft);margin-bottom:3rem}
 .prose{max-width:72ch}.prose h2{font-size:1.8rem;color:var(--olive);margin:2.6rem 0 .8rem}.prose h3{font-size:1.3rem;margin:1.5rem 0 .5rem}.prose p,.prose ul{margin-bottom:1rem}.prose ul{padding-left:1.3rem}.prose a{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:.2em}
 .notice{border-left:4px solid var(--terracotta);background:#fff;padding:1rem 1.2rem;margin:1.5rem 0}.sitemap-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;list-style:none!important;padding:0!important}.sitemap-list a{display:block;border:1px solid var(--line);padding:1rem;background:var(--paper-2)}
+.declaration-date{margin-top:2.5rem;color:var(--ink-soft);font-size:.9rem}
+.simple-footer{max-width:900px;margin:auto;padding:0 var(--pad) 2.5rem;color:var(--ink-soft);font-size:.78rem}
+.simple-footer nav{display:flex;flex-wrap:wrap;gap:.65rem 1.2rem;border-top:1px solid var(--line);padding-top:1.2rem}
+.simple-footer a{text-decoration:underline;text-underline-offset:.2em}.simple-footer a[aria-current="page"]{color:var(--olive);font-weight:700}
 
 /* ───────── reveal animation ───────── */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
