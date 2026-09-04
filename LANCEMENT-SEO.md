@@ -1,67 +1,28 @@
-# Runbook SEO — prendre la première place
+# Lancement et référencement
 
-État au 11 juin 2026. Le site est techniquement prêt (voir « Déjà en place »).
-Ce document liste, dans l'ordre, les actions qui le font passer en tête des
-résultats, et comment vérifier chaque étape.
+Le site est techniquement prêt pour un hébergement statique. Le domaine prévu, `barsac-drome.fr`, n’a pas encore d’enregistrement DNS au 4 septembre 2026.
 
-## Constat : la place est libre
+## Avant publication
 
-Recherche « barsac drôme village » (juin 2026) — la première page n'est
-occupée que par des annuaires et des tiers : communes.com, annuaire-mairie.fr,
-Wikipédia, diois-tourisme.com, villorama, villesavivre, un blog personnel.
-**Aucun site officiel de la commune n'existe dans les résultats.** Google
-privilégie systématiquement la source officielle pour les requêtes de type
-« mairie / commune » dès qu'elle existe : la place de n°1 est à prendre, pas
-à conquérir.
+1. Enregistrer ou configurer `barsac-drome.fr`, faire pointer l’apex et `www` vers l’hébergement, puis confirmer que le domaine définitif correspond aux URL canoniques de toutes les pages.
+2. Compléter l’identité de l’hébergeur dans `mentions-legales.html` et `confidentialite.html`.
+3. Confirmer les crédits photographiques dans `credits.html`.
+4. Déployer le contenu statique et vérifier HTTPS, la redirection de l’apex vers `www`, la page 404 et les en-têtes de `deploy/Caddyfile`.
+5. Tester les trois intégrations IntraMuros depuis le domaine public.
 
-Requêtes cibles (par ordre de gain) :
-1. `mairie barsac` / `mairie barsac drôme` — intention navigationnelle, gain immédiat
-2. `barsac drôme` / `barsac diois` / `barsac 26150`
-3. `que faire à barsac` / `barsac clairette de die`
-4. `berceau de la clairette de die` / `village clairette de die`
-5. `barsac` (requête nue) — long terme ; le Barsac girondin (Sauternes) a
-   l'antériorité, mais la géolocalisation des chercheurs drômois et les
-   requêtes désambiguïsées font l'essentiel du trafic réel.
+## Après publication
 
-## Lancement (dans l'ordre)
+1. Valider le domaine dans Google Search Console et Bing Webmaster Tools, puis soumettre `https://www.barsac-drome.fr/sitemap.xml`.
+2. Mettre à jour la fiche Google Business Profile de la mairie avec le domaine, l’adresse, le téléphone et les horaires officiels.
+3. Demander l’ajout du lien officiel sur les pages de l’Office de tourisme du Pays Diois, de la Communauté de communes du Diois et de l’annuaire Service-Public.fr.
+4. Ajouter le site officiel à l’infobox Wikipédia uniquement après sa mise en ligne effective.
+5. Contrôler l’indexation et les recherches « mairie Barsac Drôme », « Barsac 26150 » et « Barsac Diois » après quelques semaines.
 
-1. **Domaine pérenne** — ex. `barsac-drome.fr` ou `mairie-barsac.fr`
-   (un `.fr` est un signal France). Puis dans `.env` :
-   `SITE_URL=https://www.barsac-drome.fr` et redémarrer. Canonicals,
-   Open Graph, JSON-LD et sitemap suivent automatiquement.
-2. **Google Search Console** (search.google.com/search-console) — valider le
-   domaine, soumettre `https://…/sitemap.xml`, demander l'indexation de `/`.
-   Faire de même sur Bing Webmaster Tools (import en un clic depuis GSC).
-3. **Fiche Google Business Profile « Mairie de Barsac »** — catégorie
-   « Hôtel de ville », adresse 6 Route du Village 26150, tél. 04 75 21 71 58,
-   horaires jeudi 9 h–12 h, site web = le domaine. C'est ce qui occupe le
-   panneau de droite et la carte — la position 0 locale.
-4. **Backlinks fondateurs** (deux courriels suffisent) :
-   - Diois Tourisme (diois-tourisme.com/pays-diois/communes/barsac/) — leur
-     page Barsac existe déjà ; demander l'ajout du lien « site officiel ».
-   - Communauté de communes du Diois (paysdiois.fr) — annuaire des communes.
-   Bonus : Wikipédia « Barsac (Drôme) », champ « site officiel » de l'infobox
-   (modification libre, factuelle, acceptée).
-5. **Annuaire service-public.fr** — la mairie peut déclarer son site officiel
-   via son compte Service-Public ; ce lien institutionnel est le plus fort
-   signal « source officielle » qui existe.
+## Déjà intégré
 
-## Vérification (après 2–4 semaines)
-
-- GSC → Couverture : `/`, `/blog` et les articles indexés, zéro erreur.
-- GSC → Performance : suivre les requêtes cibles ci-dessus.
-- Recherche en navigation privée : `mairie barsac` doit sortir le site en
-  premier ; `barsac drôme` en première page puis en tête.
-- Test des résultats enrichis (search.google.com/test/rich-results) : la
-  page d'accueil doit faire ressortir FAQPage et GovernmentOffice.
-
-## Déjà en place (vérifié)
-
-- Title/description désambiguïsés « Barsac (Drôme) », Diois, Clairette de Die
-- Canonical, Open Graph, Twitter card, geo tags (FR-26, 44.731;5.289)
-- JSON-LD : City (sameAs Wikipédia/BANATIC/Diois-Tourisme), TouristDestination,
-  GovernmentOffice (coordonnées mairie vérifiées), WebSite, FAQPage (5 questions)
-- BlogPosting sur chaque article ; sitemap.xml dynamique ; robots.txt
-- gzip, Cache-Control (7 j images, 1 h CSS/JS), favicon, 301 /index.html → /
-- noindex : /admin (X-Robots-Tag), 404, erreurs ; article de test dépublié
-- Contenu unique et vérifié (sources : BANATIC, Diois Tourisme, annuaire-mairie)
+- titre, description, URL canonique et métadonnées de partage ;
+- données structurées `City`, `GovernmentOffice` et `WebSite` ;
+- sitemap XML, robots.txt, pages légales et page 404 ;
+- coordonnées cliquables, informations sourcées et liens institutionnels ;
+- images WebP, dimensions explicites et polices auto-hébergées ;
+- contrôle automatique des liens locaux et de la configuration essentielle.

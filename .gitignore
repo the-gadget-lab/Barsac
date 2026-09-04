@@ -1,5 +1,2 @@
-node_modules/
-data/
-.env
-*.log
-fwdbarsac.zip
+.DS_Store
+Thumbs.db

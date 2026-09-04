@@ -1,8 +1,27 @@
-# Reverse proxy avec HTTPS automatique (Let's Encrypt).
-# Remplacer le domaine par celui retenu, puis : caddy run --config deploy/Caddyfile
+# Site statique avec HTTPS automatique (Let's Encrypt).
 www.barsac-drome.fr {
-	encode gzip
-	reverse_proxy localhost:3001
+	root * /srv/barsac
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+		Content-Security-Policy "default-src 'self'; script-src 'self' https://widget.intramuros.org; style-src 'self' 'unsafe-inline' https://widget.intramuros.org; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.appli-intramuros.com https://widget.intramuros.org https://www.intramuros.org; frame-src https://www.intramuros.org; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'; upgrade-insecure-requests"
+	}
+
+	@immutable path /assets/*.woff2 /assets/*.webp /assets/*.jpg /assets/*.svg
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+	@code path /assets/*.css /assets/*.js
+	header @code Cache-Control "public, max-age=3600, must-revalidate"
+
+	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
 }
 
 # L'apex redirige vers www pour un canonical unique.
